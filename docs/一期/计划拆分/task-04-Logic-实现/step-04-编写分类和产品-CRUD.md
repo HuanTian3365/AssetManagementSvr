@@ -8,15 +8,27 @@
 在同一文件追加：
 
 ```go
-func (s *sAsset) CreateCategory(ctx context.Context, data gdb.Map) (uint64, error) {
-	return s.create(ctx, dao.AssetCategory.Table(), data)
+func (s *sAsset) CreateCategory(ctx context.Context, in *model.AssetCategoryCreateInput) (uint64, error) {
+	return s.create(ctx, dao.AssetCategory.Table(), gdb.Map{
+		"parent_id": in.ParentId,
+		"name":      in.Name,
+		"code":      in.Code,
+		"sort":      in.Sort,
+		"remark":    in.Remark,
+	})
 }
 
-func (s *sAsset) UpdateCategory(ctx context.Context, id uint64, data gdb.Map) error {
-	if parentId, ok := data["parent_id"].(uint64); ok && parentId == id {
+func (s *sAsset) UpdateCategory(ctx context.Context, in *model.AssetCategoryUpdateInput) error {
+	if in.ParentId == in.Id {
 		return gerror.New("父级分类不能选择自己")
 	}
-	return s.update(ctx, dao.AssetCategory.Table(), id, data)
+	return s.update(ctx, dao.AssetCategory.Table(), in.Id, gdb.Map{
+		"parent_id": in.ParentId,
+		"name":      in.Name,
+		"code":      in.Code,
+		"sort":      in.Sort,
+		"remark":    in.Remark,
+	})
 }
 
 func (s *sAsset) DeleteCategory(ctx context.Context, id uint64) error {
@@ -37,20 +49,44 @@ func (s *sAsset) DeleteCategory(ctx context.Context, id uint64) error {
 	return s.softDelete(ctx, dao.AssetCategory.Table(), id)
 }
 
-func (s *sAsset) DetailCategory(ctx context.Context, id uint64) (gdb.Record, error) {
-	return s.detail(ctx, dao.AssetCategory.Table(), id)
+func (s *sAsset) DetailCategory(ctx context.Context, id uint64) (*model.AssetCategoryOutput, error) {
+	var out *model.AssetCategoryOutput
+	err := dao.AssetCategory.Ctx(ctx).Where("id", id).WhereNull("deleted_at").Scan(&out)
+	return out, err
 }
 
-func (s *sAsset) ListCategory(ctx context.Context, page model.PageInput, filters gdb.Map) (gdb.Result, int, error) {
-	return s.list(ctx, dao.AssetCategory.Table(), page, filters)
+func (s *sAsset) ListCategory(ctx context.Context, in *model.AssetCategoryListInput) ([]*model.AssetCategoryOutput, int, error) {
+	var list []*model.AssetCategoryOutput
+	total, err := s.listModel(ctx, dao.AssetCategory.Table(), in.PageInput, gdb.Map{
+		"parent_id": in.ParentId,
+		"name":      in.Name,
+		"code":      in.Code,
+	}, &list)
+	return list, total, err
 }
 
-func (s *sAsset) CreateProduct(ctx context.Context, data gdb.Map) (uint64, error) {
-	return s.create(ctx, dao.AssetProduct.Table(), data)
+func (s *sAsset) CreateProduct(ctx context.Context, in *model.AssetProductCreateInput) (uint64, error) {
+	return s.create(ctx, dao.AssetProduct.Table(), gdb.Map{
+		"category_id": in.CategoryId,
+		"name":        in.Name,
+		"code":        in.Code,
+		"brand":       in.Brand,
+		"model":       in.Model,
+		"unit":        in.Unit,
+		"remark":      in.Remark,
+	})
 }
 
-func (s *sAsset) UpdateProduct(ctx context.Context, id uint64, data gdb.Map) error {
-	return s.update(ctx, dao.AssetProduct.Table(), id, data)
+func (s *sAsset) UpdateProduct(ctx context.Context, in *model.AssetProductUpdateInput) error {
+	return s.update(ctx, dao.AssetProduct.Table(), in.Id, gdb.Map{
+		"category_id": in.CategoryId,
+		"name":        in.Name,
+		"code":        in.Code,
+		"brand":       in.Brand,
+		"model":       in.Model,
+		"unit":        in.Unit,
+		"remark":      in.Remark,
+	})
 }
 
 func (s *sAsset) DeleteProduct(ctx context.Context, id uint64) error {
@@ -64,11 +100,19 @@ func (s *sAsset) DeleteProduct(ctx context.Context, id uint64) error {
 	return s.softDelete(ctx, dao.AssetProduct.Table(), id)
 }
 
-func (s *sAsset) DetailProduct(ctx context.Context, id uint64) (gdb.Record, error) {
-	return s.detail(ctx, dao.AssetProduct.Table(), id)
+func (s *sAsset) DetailProduct(ctx context.Context, id uint64) (*model.AssetProductOutput, error) {
+	var out *model.AssetProductOutput
+	err := dao.AssetProduct.Ctx(ctx).Where("id", id).WhereNull("deleted_at").Scan(&out)
+	return out, err
 }
 
-func (s *sAsset) ListProduct(ctx context.Context, page model.PageInput, filters gdb.Map) (gdb.Result, int, error) {
-	return s.list(ctx, dao.AssetProduct.Table(), page, filters)
+func (s *sAsset) ListProduct(ctx context.Context, in *model.AssetProductListInput) ([]*model.AssetProductOutput, int, error) {
+	var list []*model.AssetProductOutput
+	total, err := s.listModel(ctx, dao.AssetProduct.Table(), in.PageInput, gdb.Map{
+		"category_id": in.CategoryId,
+		"name":        in.Name,
+		"code":        in.Code,
+	}, &list)
+	return list, total, err
 }
 ```

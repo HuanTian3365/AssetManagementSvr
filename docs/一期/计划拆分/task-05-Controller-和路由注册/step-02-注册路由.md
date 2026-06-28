@@ -13,7 +13,7 @@ import (
 
 	"github.com/gogf/gf/v2/frame/g"
 
-	"your_project/internal/controller/asset"
+	"asset_management_svr/internal/controller/asset"
 )
 ```
 

@@ -21,9 +21,9 @@ import (
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/os/gtime"
 
-	"your_project/internal/dao"
-	"your_project/internal/model"
-	"your_project/internal/service"
+	"asset_management_svr/internal/dao"
+	"asset_management_svr/internal/model"
+	"asset_management_svr/internal/service"
 )
 
 type sAsset struct{}
@@ -41,4 +41,4 @@ func normalizePage(page model.PageInput) model.PageInput {
 }
 ```
 
-将 `your_project/internal/...` 替换为项目实际 module 路径对应的导入路径。
+当前项目 `go.mod` 的 module 为 `asset_management_svr`，示例导入路径已按该 module 编写。

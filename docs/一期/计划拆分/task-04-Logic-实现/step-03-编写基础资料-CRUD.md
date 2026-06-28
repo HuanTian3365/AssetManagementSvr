@@ -8,12 +8,22 @@
 在同一文件追加：
 
 ```go
-func (s *sAsset) CreateBuilding(ctx context.Context, data gdb.Map) (uint64, error) {
-	return s.create(ctx, dao.AssetBuilding.Table(), data)
+func (s *sAsset) CreateBuilding(ctx context.Context, in *model.AssetBuildingCreateInput) (uint64, error) {
+	return s.create(ctx, dao.AssetBuilding.Table(), gdb.Map{
+		"name":    in.Name,
+		"code":    in.Code,
+		"address": in.Address,
+		"remark":  in.Remark,
+	})
 }
 
-func (s *sAsset) UpdateBuilding(ctx context.Context, id uint64, data gdb.Map) error {
-	return s.update(ctx, dao.AssetBuilding.Table(), id, data)
+func (s *sAsset) UpdateBuilding(ctx context.Context, in *model.AssetBuildingUpdateInput) error {
+	return s.update(ctx, dao.AssetBuilding.Table(), in.Id, gdb.Map{
+		"name":    in.Name,
+		"code":    in.Code,
+		"address": in.Address,
+		"remark":  in.Remark,
+	})
 }
 
 func (s *sAsset) DeleteBuilding(ctx context.Context, id uint64) error {
@@ -27,20 +37,39 @@ func (s *sAsset) DeleteBuilding(ctx context.Context, id uint64) error {
 	return s.softDelete(ctx, dao.AssetBuilding.Table(), id)
 }
 
-func (s *sAsset) DetailBuilding(ctx context.Context, id uint64) (gdb.Record, error) {
-	return s.detail(ctx, dao.AssetBuilding.Table(), id)
+func (s *sAsset) DetailBuilding(ctx context.Context, id uint64) (*model.AssetBuildingOutput, error) {
+	var out *model.AssetBuildingOutput
+	err := dao.AssetBuilding.Ctx(ctx).Where("id", id).WhereNull("deleted_at").Scan(&out)
+	return out, err
 }
 
-func (s *sAsset) ListBuilding(ctx context.Context, page model.PageInput, filters gdb.Map) (gdb.Result, int, error) {
-	return s.list(ctx, dao.AssetBuilding.Table(), page, filters)
+func (s *sAsset) ListBuilding(ctx context.Context, in *model.AssetBuildingListInput) ([]*model.AssetBuildingOutput, int, error) {
+	var list []*model.AssetBuildingOutput
+	total, err := s.listModel(ctx, dao.AssetBuilding.Table(), in.PageInput, gdb.Map{
+		"name": in.Name,
+		"code": in.Code,
+	}, &list)
+	return list, total, err
 }
 
-func (s *sAsset) CreateFloor(ctx context.Context, data gdb.Map) (uint64, error) {
-	return s.create(ctx, dao.AssetFloor.Table(), data)
+func (s *sAsset) CreateFloor(ctx context.Context, in *model.AssetFloorCreateInput) (uint64, error) {
+	return s.create(ctx, dao.AssetFloor.Table(), gdb.Map{
+		"building_id": in.BuildingId,
+		"name":        in.Name,
+		"code":        in.Code,
+		"floor_no":    in.FloorNo,
+		"remark":      in.Remark,
+	})
 }
 
-func (s *sAsset) UpdateFloor(ctx context.Context, id uint64, data gdb.Map) error {
-	return s.update(ctx, dao.AssetFloor.Table(), id, data)
+func (s *sAsset) UpdateFloor(ctx context.Context, in *model.AssetFloorUpdateInput) error {
+	return s.update(ctx, dao.AssetFloor.Table(), in.Id, gdb.Map{
+		"building_id": in.BuildingId,
+		"name":        in.Name,
+		"code":        in.Code,
+		"floor_no":    in.FloorNo,
+		"remark":      in.Remark,
+	})
 }
 
 func (s *sAsset) DeleteFloor(ctx context.Context, id uint64) error {
@@ -54,26 +83,48 @@ func (s *sAsset) DeleteFloor(ctx context.Context, id uint64) error {
 	return s.softDelete(ctx, dao.AssetFloor.Table(), id)
 }
 
-func (s *sAsset) DetailFloor(ctx context.Context, id uint64) (gdb.Record, error) {
-	return s.detail(ctx, dao.AssetFloor.Table(), id)
+func (s *sAsset) DetailFloor(ctx context.Context, id uint64) (*model.AssetFloorOutput, error) {
+	var out *model.AssetFloorOutput
+	err := dao.AssetFloor.Ctx(ctx).Where("id", id).WhereNull("deleted_at").Scan(&out)
+	return out, err
 }
 
-func (s *sAsset) ListFloor(ctx context.Context, page model.PageInput, filters gdb.Map) (gdb.Result, int, error) {
-	return s.list(ctx, dao.AssetFloor.Table(), page, filters)
+func (s *sAsset) ListFloor(ctx context.Context, in *model.AssetFloorListInput) ([]*model.AssetFloorOutput, int, error) {
+	var list []*model.AssetFloorOutput
+	total, err := s.listModel(ctx, dao.AssetFloor.Table(), in.PageInput, gdb.Map{
+		"building_id": in.BuildingId,
+		"name":        in.Name,
+		"code":        in.Code,
+	}, &list)
+	return list, total, err
 }
 
-func (s *sAsset) CreateRoom(ctx context.Context, data gdb.Map) (uint64, error) {
-	if err := s.checkFloorBelongsToBuilding(ctx, data["floor_id"].(uint64), data["building_id"].(uint64)); err != nil {
+func (s *sAsset) CreateRoom(ctx context.Context, in *model.AssetRoomCreateInput) (uint64, error) {
+	if err := s.checkFloorBelongsToBuilding(ctx, in.FloorId, in.BuildingId); err != nil {
 		return 0, err
 	}
-	return s.create(ctx, dao.AssetRoom.Table(), data)
+	return s.create(ctx, dao.AssetRoom.Table(), gdb.Map{
+		"building_id": in.BuildingId,
+		"floor_id":    in.FloorId,
+		"name":        in.Name,
+		"code":        in.Code,
+		"room_no":     in.RoomNo,
+		"remark":      in.Remark,
+	})
 }
 
-func (s *sAsset) UpdateRoom(ctx context.Context, id uint64, data gdb.Map) error {
-	if err := s.checkFloorBelongsToBuilding(ctx, data["floor_id"].(uint64), data["building_id"].(uint64)); err != nil {
+func (s *sAsset) UpdateRoom(ctx context.Context, in *model.AssetRoomUpdateInput) error {
+	if err := s.checkFloorBelongsToBuilding(ctx, in.FloorId, in.BuildingId); err != nil {
 		return err
 	}
-	return s.update(ctx, dao.AssetRoom.Table(), id, data)
+	return s.update(ctx, dao.AssetRoom.Table(), in.Id, gdb.Map{
+		"building_id": in.BuildingId,
+		"floor_id":    in.FloorId,
+		"name":        in.Name,
+		"code":        in.Code,
+		"room_no":     in.RoomNo,
+		"remark":      in.Remark,
+	})
 }
 
 func (s *sAsset) DeleteRoom(ctx context.Context, id uint64) error {
@@ -87,11 +138,20 @@ func (s *sAsset) DeleteRoom(ctx context.Context, id uint64) error {
 	return s.softDelete(ctx, dao.AssetRoom.Table(), id)
 }
 
-func (s *sAsset) DetailRoom(ctx context.Context, id uint64) (gdb.Record, error) {
-	return s.detail(ctx, dao.AssetRoom.Table(), id)
+func (s *sAsset) DetailRoom(ctx context.Context, id uint64) (*model.AssetRoomOutput, error) {
+	var out *model.AssetRoomOutput
+	err := dao.AssetRoom.Ctx(ctx).Where("id", id).WhereNull("deleted_at").Scan(&out)
+	return out, err
 }
 
-func (s *sAsset) ListRoom(ctx context.Context, page model.PageInput, filters gdb.Map) (gdb.Result, int, error) {
-	return s.list(ctx, dao.AssetRoom.Table(), page, filters)
+func (s *sAsset) ListRoom(ctx context.Context, in *model.AssetRoomListInput) ([]*model.AssetRoomOutput, int, error) {
+	var list []*model.AssetRoomOutput
+	total, err := s.listModel(ctx, dao.AssetRoom.Table(), in.PageInput, gdb.Map{
+		"building_id": in.BuildingId,
+		"floor_id":    in.FloorId,
+		"name":        in.Name,
+		"code":        in.Code,
+	}, &list)
+	return list, total, err
 }
 ```

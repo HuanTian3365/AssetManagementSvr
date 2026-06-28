@@ -22,7 +22,7 @@ func (s *sAsset) detail(ctx context.Context, table string, id uint64) (gdb.Recor
 	return g.DB().Model(table).Ctx(ctx).Where("id", id).WhereNull("deleted_at").One()
 }
 
-func (s *sAsset) list(ctx context.Context, table string, page model.PageInput, filters gdb.Map) (gdb.Result, int, error) {
+func (s *sAsset) listModel(ctx context.Context, table string, page model.PageInput, filters gdb.Map, out interface{}) (int, error) {
 	m := g.DB().Model(table).Ctx(ctx).WhereNull("deleted_at")
 	for k, v := range filters {
 		switch value := v.(type) {
@@ -46,10 +46,10 @@ func (s *sAsset) list(ctx context.Context, table string, page model.PageInput, f
 	}
 	total, err := m.Count()
 	if err != nil {
-		return nil, 0, err
+		return 0, err
 	}
-	result, err := m.OrderDesc("id").Limit(page.Offset(), page.Limit()).All()
-	return result, total, err
+	err = m.OrderDesc("id").Limit(page.Offset(), page.Limit()).Scan(out)
+	return total, err
 }
 
 func (s *sAsset) softDelete(ctx context.Context, table string, id uint64) error {

@@ -13,50 +13,48 @@ package service
 import (
 	"context"
 
-	"github.com/gogf/gf/v2/database/gdb"
-
-	"your_project/internal/model"
+	"asset_management_svr/internal/model"
 )
 
 type IAsset interface {
-	CreateBuilding(ctx context.Context, data gdb.Map) (uint64, error)
-	UpdateBuilding(ctx context.Context, id uint64, data gdb.Map) error
+	CreateBuilding(ctx context.Context, in *model.AssetBuildingCreateInput) (uint64, error)
+	UpdateBuilding(ctx context.Context, in *model.AssetBuildingUpdateInput) error
 	DeleteBuilding(ctx context.Context, id uint64) error
-	DetailBuilding(ctx context.Context, id uint64) (gdb.Record, error)
-	ListBuilding(ctx context.Context, page model.PageInput, filters gdb.Map) (gdb.Result, int, error)
+	DetailBuilding(ctx context.Context, id uint64) (*model.AssetBuildingOutput, error)
+	ListBuilding(ctx context.Context, in *model.AssetBuildingListInput) ([]*model.AssetBuildingOutput, int, error)
 
-	CreateFloor(ctx context.Context, data gdb.Map) (uint64, error)
-	UpdateFloor(ctx context.Context, id uint64, data gdb.Map) error
+	CreateFloor(ctx context.Context, in *model.AssetFloorCreateInput) (uint64, error)
+	UpdateFloor(ctx context.Context, in *model.AssetFloorUpdateInput) error
 	DeleteFloor(ctx context.Context, id uint64) error
-	DetailFloor(ctx context.Context, id uint64) (gdb.Record, error)
-	ListFloor(ctx context.Context, page model.PageInput, filters gdb.Map) (gdb.Result, int, error)
+	DetailFloor(ctx context.Context, id uint64) (*model.AssetFloorOutput, error)
+	ListFloor(ctx context.Context, in *model.AssetFloorListInput) ([]*model.AssetFloorOutput, int, error)
 
-	CreateRoom(ctx context.Context, data gdb.Map) (uint64, error)
-	UpdateRoom(ctx context.Context, id uint64, data gdb.Map) error
+	CreateRoom(ctx context.Context, in *model.AssetRoomCreateInput) (uint64, error)
+	UpdateRoom(ctx context.Context, in *model.AssetRoomUpdateInput) error
 	DeleteRoom(ctx context.Context, id uint64) error
-	DetailRoom(ctx context.Context, id uint64) (gdb.Record, error)
-	ListRoom(ctx context.Context, page model.PageInput, filters gdb.Map) (gdb.Result, int, error)
+	DetailRoom(ctx context.Context, id uint64) (*model.AssetRoomOutput, error)
+	ListRoom(ctx context.Context, in *model.AssetRoomListInput) ([]*model.AssetRoomOutput, int, error)
 
-	CreateCategory(ctx context.Context, data gdb.Map) (uint64, error)
-	UpdateCategory(ctx context.Context, id uint64, data gdb.Map) error
+	CreateCategory(ctx context.Context, in *model.AssetCategoryCreateInput) (uint64, error)
+	UpdateCategory(ctx context.Context, in *model.AssetCategoryUpdateInput) error
 	DeleteCategory(ctx context.Context, id uint64) error
-	DetailCategory(ctx context.Context, id uint64) (gdb.Record, error)
-	ListCategory(ctx context.Context, page model.PageInput, filters gdb.Map) (gdb.Result, int, error)
+	DetailCategory(ctx context.Context, id uint64) (*model.AssetCategoryOutput, error)
+	ListCategory(ctx context.Context, in *model.AssetCategoryListInput) ([]*model.AssetCategoryOutput, int, error)
 
-	CreateProduct(ctx context.Context, data gdb.Map) (uint64, error)
-	UpdateProduct(ctx context.Context, id uint64, data gdb.Map) error
+	CreateProduct(ctx context.Context, in *model.AssetProductCreateInput) (uint64, error)
+	UpdateProduct(ctx context.Context, in *model.AssetProductUpdateInput) error
 	DeleteProduct(ctx context.Context, id uint64) error
-	DetailProduct(ctx context.Context, id uint64) (gdb.Record, error)
-	ListProduct(ctx context.Context, page model.PageInput, filters gdb.Map) (gdb.Result, int, error)
+	DetailProduct(ctx context.Context, id uint64) (*model.AssetProductOutput, error)
+	ListProduct(ctx context.Context, in *model.AssetProductListInput) ([]*model.AssetProductOutput, int, error)
 
-	CreateItem(ctx context.Context, in model.AssetItemCreateInput) (model.AssetItemCreateOutput, error)
-	UpdateItem(ctx context.Context, in model.AssetItemUpdateInput) error
+	CreateItem(ctx context.Context, in *model.AssetItemCreateInput) (*model.AssetItemCreateOutput, error)
+	UpdateItem(ctx context.Context, in *model.AssetItemUpdateInput) error
 	DeleteItem(ctx context.Context, id uint64) error
-	DetailItem(ctx context.Context, id uint64) (gdb.Record, error)
-	ListItem(ctx context.Context, page model.PageInput, filters gdb.Map) (gdb.Result, int, error)
-	InboundItem(ctx context.Context, assetId uint64, roomId uint64, remark string) error
-	TransferItem(ctx context.Context, assetId uint64, roomId uint64, remark string) error
-	ListLocationRecord(ctx context.Context, assetId uint64, page model.PageInput) (gdb.Result, int, error)
+	DetailItem(ctx context.Context, id uint64) (*model.AssetItemOutput, error)
+	ListItem(ctx context.Context, in *model.AssetItemListInput) ([]*model.AssetItemOutput, int, error)
+	InboundItem(ctx context.Context, in *model.AssetItemInboundInput) error
+	TransferItem(ctx context.Context, in *model.AssetItemTransferInput) error
+	ListLocationRecord(ctx context.Context, in *model.AssetLocationRecordListInput) ([]*model.AssetLocationRecordOutput, int, error)
 }
 
 var localAsset IAsset
@@ -73,4 +71,4 @@ func RegisterAsset(i IAsset) {
 }
 ```
 
-将 `your_project/internal/model` 替换为项目实际 module 路径对应的导入路径。这个导入路径来自 `go.mod` 的 `module` 行。
+当前项目 `go.mod` 的 module 为 `asset_management_svr`，示例导入路径已按该 module 编写。

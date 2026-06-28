@@ -24,6 +24,6 @@
 
 - 设计文档中的一期范围均已覆盖：位置、产品、资产、编码、入库、转移、位置记录、删除引用保护。
 - 项目初始化和配置已按用户要求排除，由用户自行完成。
-- 代码示例中的 `your_project/...` 是项目建好后需要按 `go.mod` 的 `module` 行替换的导入路径，例如 `module personal-asset-gf` 时替换为 `personal-asset-gf/...`。
+- 当前项目 `go.mod` 的 module 为 `asset_management_svr`，代码示例中的导入路径按该 module 编写。
 - 计划没有保留未说明用途的占位项。
 - GoFrame CLI 用法参考了官方 `gf gen dao`、`gf gen ctrl` 文档；本机已验证 `gf v2.10.2` 可用。
