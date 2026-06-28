@@ -2,6 +2,7 @@ package v1
 
 import (
 	"asset_management_svr/internal/model"
+	"asset_management_svr/internal/model/common"
 
 	"github.com/gogf/gf/v2/frame/g"
 )
@@ -34,7 +35,7 @@ type BuildingViewReq struct {
 }
 
 type BuildingViewRes struct {
-	model.BuildingViewRes
+	*model.BuildingViewRes
 }
 
 type BuildingListReq struct {
@@ -43,5 +44,6 @@ type BuildingListReq struct {
 }
 
 type BuildingListRes struct {
+	common.PageResult
 	Items []*model.BuildingListRes `json:"items"   dc:"数据列表"`
 }

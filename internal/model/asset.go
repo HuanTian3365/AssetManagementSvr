@@ -1,6 +1,10 @@
 package model
 
-import "github.com/gogf/gf/v2/os/gtime"
+import (
+	"asset_management_svr/internal/model/common"
+
+	"github.com/gogf/gf/v2/os/gtime"
+)
 
 // BuildingCreateReq 创建建筑
 type BuildingCreateReq struct {
@@ -42,19 +46,20 @@ type BuildingViewRes struct {
 
 // BuildingListReq 建筑列表
 type BuildingListReq struct {
-	Id       uint64        `json:"id" dc:"ID"`
-	Name     string        `json:"name" dc:"建筑名称"`
-	Code     string        `json:"code" dc:"建筑编码"`
-	Address  string        `json:"address" dc:"建筑地址"`
-	CreateAt []*gtime.Time `json:"createAt" dc:"创建时间"`
+	common.PageRequest
+	Id        uint64        `json:"id" dc:"ID"`
+	Name      string        `json:"name" dc:"建筑名称"`
+	Code      string        `json:"code" dc:"建筑编码"`
+	Address   string        `json:"address" dc:"建筑地址"`
+	CreatedAt []*gtime.Time `json:"createdAt" dc:"创建时间"`
 }
 
 type BuildingListRes struct {
-	Id       uint64      `json:"id" dc:"ID"`
-	Name     string      `json:"name" dc:"建筑名称"`
-	Code     string      `json:"code" dc:"建筑编码"`
-	Address  string      `json:"address" dc:"建筑地址"`
-	Remark   string      `json:"remark" dc:"备注"`
-	CreateAt *gtime.Time `json:"createAt" dc:"创建时间"`
-	UpdateAt *gtime.Time `json:"updateAt" dc:"更新时间"`
+	Id        uint64      `json:"id" dc:"ID"`
+	Name      string      `json:"name" dc:"建筑名称"`
+	Code      string      `json:"code" dc:"建筑编码"`
+	Address   string      `json:"address" dc:"建筑地址"`
+	Remark    string      `json:"remark" dc:"备注"`
+	CreatedAt *gtime.Time `json:"createdAt" dc:"创建时间"`
+	UpdatedAt *gtime.Time `json:"updatedAt" dc:"更新时间"`
 }

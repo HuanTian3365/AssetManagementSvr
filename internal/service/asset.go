@@ -18,6 +18,10 @@ type (
 		BuildingUpdate(ctx context.Context, req *model.BuildingUpdateReq) (err error)
 		// BuildingDelete 删除建筑
 		BuildingDelete(ctx context.Context, req *model.BuildingDeleteReq) (err error)
+		// BuildingView 建筑详情
+		BuildingView(ctx context.Context, req *model.BuildingViewReq) (res *model.BuildingViewRes, err error)
+		// BuildingList 建筑列表
+		BuildingList(ctx context.Context, req *model.BuildingListReq) (res []*model.BuildingListRes, total int, err error)
 	}
 )
 
