@@ -27,17 +27,10 @@ func (s *sAsset) UpdateBuilding(ctx context.Context, in *model.AssetBuildingUpda
 }
 
 func (s *sAsset) DeleteBuilding(ctx context.Context, id uint64) error {
-	count, err := dao.AssetFloor.Ctx(ctx).Where("building_id", id).WhereNull("deleted_at").Count()
-	if err != nil {
-		return err
-	}
-	if count > 0 {
-		return gerror.New("建筑下存在楼层，不能删除")
-	}
 	return s.softDelete(ctx, dao.AssetBuilding.Table(), id)
 }
 
-func (s *sAsset) DetailBuilding(ctx context.Context, id uint64) (*model.AssetBuildingOutput, error) {
+func (s *sAsset) BuildingView(ctx context.Context, id uint64) (*model.AssetBuildingOutput, error) {
 	var out *model.AssetBuildingOutput
 	err := dao.AssetBuilding.Ctx(ctx).Where("id", id).WhereNull("deleted_at").Scan(&out)
 	return out, err

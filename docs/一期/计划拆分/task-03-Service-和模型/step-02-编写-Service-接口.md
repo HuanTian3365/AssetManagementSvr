@@ -20,7 +20,7 @@ type IAsset interface {
 	CreateBuilding(ctx context.Context, in *model.AssetBuildingCreateInput) (uint64, error)
 	UpdateBuilding(ctx context.Context, in *model.AssetBuildingUpdateInput) error
 	DeleteBuilding(ctx context.Context, id uint64) error
-	DetailBuilding(ctx context.Context, id uint64) (*model.AssetBuildingOutput, error)
+	BuildingView(ctx context.Context, id uint64) (*model.AssetBuildingOutput, error)
 	ListBuilding(ctx context.Context, in *model.AssetBuildingListInput) ([]*model.AssetBuildingOutput, int, error)
 
 	CreateFloor(ctx context.Context, in *model.AssetFloorCreateInput) (uint64, error)

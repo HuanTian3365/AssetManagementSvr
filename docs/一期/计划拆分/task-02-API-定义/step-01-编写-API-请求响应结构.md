@@ -40,11 +40,11 @@ type BuildingDeleteReq struct {
 }
 type BuildingDeleteRes struct{}
 
-type BuildingDetailReq struct {
-	g.Meta `path:"/asset/building/detail" method:"get" tags:"资产建筑" summary:"建筑详情"`
+type BuildingViewReq struct {
+	g.Meta `path:"/asset/building/view" method:"get" tags:"资产建筑" summary:"建筑详情"`
 	model.IdInput
 }
-type BuildingDetailRes struct{ Data *model.AssetBuildingOutput `json:"data" dc:"建筑详情"` }
+type BuildingViewRes struct{ Data *model.AssetBuildingOutput `json:"data" dc:"建筑详情"` }
 
 type BuildingListReq struct {
 	g.Meta `path:"/asset/building/list" method:"get" tags:"资产建筑" summary:"建筑列表"`
@@ -52,7 +52,7 @@ type BuildingListReq struct {
 }
 type BuildingListRes struct {
 	List  []*model.AssetBuildingOutput `json:"list" dc:"建筑列表"`
-	Total int                          `json:"total" dc:"总数"`
+	Total int                          `json:"total" dc:"总条数"`
 }
 
 type FloorCreateReq struct {

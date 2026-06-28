@@ -7,7 +7,6 @@ import (
 	"context"
 
 	"github.com/gogf/gf/v2/errors/gerror"
-	"github.com/gogf/gf/v2/frame/g"
 )
 
 // 根据Code获取建筑 为确保唯一,不忽略软删除数据
@@ -172,7 +171,6 @@ func (a *sAsset) BuildingList(ctx context.Context, req *model.BuildingListReq) (
 	mod = mod.OrderDesc(col.Id)
 
 	err = mod.ScanAndCount(&res, &total, false)
-	g.Log().Info(ctx, res)
 	if err != nil {
 		return nil, 0, err
 	}

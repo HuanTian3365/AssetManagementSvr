@@ -38,9 +38,9 @@ func (c *ControllerV1) BuildingDelete(ctx context.Context, req *v1.BuildingDelet
 	return &v1.BuildingDeleteRes{}, service.Asset().DeleteBuilding(ctx, req.Id)
 }
 
-func (c *ControllerV1) BuildingDetail(ctx context.Context, req *v1.BuildingDetailReq) (res *v1.BuildingDetailRes, err error) {
-	data, err := service.Asset().DetailBuilding(ctx, req.Id)
-	return &v1.BuildingDetailRes{Data: data}, err
+func (c *ControllerV1) BuildingView(ctx context.Context, req *v1.BuildingViewReq) (res *v1.BuildingViewRes, err error) {
+	data, err := service.Asset().BuildingView(ctx, req.Id)
+	return &v1.BuildingViewRes{Data: data}, err
 }
 
 func (c *ControllerV1) BuildingList(ctx context.Context, req *v1.BuildingListReq) (res *v1.BuildingListRes, err error) {
