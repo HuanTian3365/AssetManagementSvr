@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS asset_floor (
   building_id BIGINT UNSIGNED NOT NULL COMMENT '建筑ID',
   name VARCHAR(100) NOT NULL COMMENT '楼层名称',
   code VARCHAR(64) NOT NULL COMMENT '楼层编码',
-  floor_no INT NOT NULL DEFAULT 0 COMMENT '楼层序号',
+  floor_no INT NOT NULL COMMENT '楼层序号',
   remark VARCHAR(500) NOT NULL DEFAULT '' COMMENT '备注',
   created_at DATETIME NULL COMMENT '创建时间',
   updated_at DATETIME NULL COMMENT '更新时间',
@@ -115,7 +115,7 @@ CREATE TABLE IF NOT EXISTS asset_item (
 CREATE TABLE IF NOT EXISTS asset_location_record (
   id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID',
   asset_id BIGINT UNSIGNED NOT NULL COMMENT '资产ID',
-  action_type VARCHAR(32) NOT NULL COMMENT '动作类型：inbound入库 transfer转移',
+  action_type TINYINT NOT NULL COMMENT '动作类型：0入库 1转移',
   from_building_id BIGINT UNSIGNED NULL COMMENT '来源建筑ID',
   from_floor_id BIGINT UNSIGNED NULL COMMENT '来源楼层ID',
   from_room_id BIGINT UNSIGNED NULL COMMENT '来源房间ID',

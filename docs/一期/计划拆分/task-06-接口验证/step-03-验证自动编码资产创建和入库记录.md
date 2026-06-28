@@ -15,5 +15,5 @@ curl "http://127.0.0.1:8000/asset/item/location-record/list?assetId=1&page=1&pag
 Expected:
 
 ```text
-资产创建成功，返回 assetCode；位置记录列表包含 inbound 记录。
+资产创建成功，返回 assetCode；位置记录列表包含 actionType=0 的入库记录。
 ```

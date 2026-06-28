@@ -16,8 +16,8 @@ const (
 	AssetStatusRepair  = 3
 	AssetStatusScraped = 4
 
-	AssetLocationActionInbound  = "inbound"
-	AssetLocationActionTransfer = "transfer"
+	AssetLocationActionInbound  = 0
+	AssetLocationActionTransfer = 1
 )
 
 type PageInput struct {
