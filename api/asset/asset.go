@@ -21,4 +21,9 @@ type IAssetV1 interface {
 	FloorDelete(ctx context.Context, req *v1.FloorDeleteReq) (res *v1.FloorDeleteRes, err error)
 	FloorView(ctx context.Context, req *v1.FloorViewReq) (res *v1.FloorViewRes, err error)
 	FloorList(ctx context.Context, req *v1.FloorListReq) (res *v1.FloorListRes, err error)
+	RoomCreate(ctx context.Context, req *v1.RoomCreateReq) (res *v1.RoomCreateRes, err error)
+	RoomUpdate(ctx context.Context, req *v1.RoomUpdateReq) (res *v1.RoomUpdateRes, err error)
+	RoomDelete(ctx context.Context, req *v1.RoomDeleteReq) (res *v1.RoomDeleteRes, err error)
+	RoomView(ctx context.Context, req *v1.RoomViewReq) (res *v1.RoomViewRes, err error)
+	RoomList(ctx context.Context, req *v1.RoomListReq) (res *v1.RoomListRes, err error)
 }

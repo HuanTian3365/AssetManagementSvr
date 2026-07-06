@@ -30,7 +30,13 @@ type (
 		FloorDelete(ctx context.Context, req *model.FloorDeleteReq) (err error)
 		// FloorView 楼层详情
 		FloorView(ctx context.Context, req *model.FloorViewReq) (res *model.FloorViewRes, err error)
+		// FloorList 楼层列表
 		FloorList(ctx context.Context, req *model.FloorListReq) (res []*model.FloorListRes, total int, err error)
+		RoomCreate(ctx context.Context, req *model.RoomCreateReq) (err error)
+		RoomUpdate(ctx context.Context, req *model.RoomUpdateReq) (err error)
+		RoomDelete(ctx context.Context, req *model.RoomDeleteReq) (err error)
+		RoomView(ctx context.Context, req *model.RoomViewReq) (res *model.RoomViewRes, err error)
+		RoomList(ctx context.Context, req *model.RoomListReq) (res []*model.RoomListRes, total int, err error)
 	}
 )
 

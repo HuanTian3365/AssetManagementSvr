@@ -35,13 +35,13 @@ type BuildingViewReq struct {
 }
 
 type BuildingViewRes struct {
-	Id       uint64      `json:"id" dc:"ID"`
-	Name     string      `json:"name" dc:"建筑名称"`
-	Code     string      `json:"code" dc:"建筑编码"`
-	Address  string      `json:"address" dc:"建筑地址"`
-	Remark   string      `json:"remark" dc:"备注"`
-	CreateAt *gtime.Time `json:"createAt" dc:"创建时间"`
-	UpdateAt *gtime.Time `json:"updateAt" dc:"更新时间"`
+	Id        uint64      `json:"id" dc:"ID"`
+	Name      string      `json:"name" dc:"建筑名称"`
+	Code      string      `json:"code" dc:"建筑编码"`
+	Address   string      `json:"address" dc:"建筑地址"`
+	Remark    string      `json:"remark" dc:"备注"`
+	CreatedAt *gtime.Time `json:"CreatedAt" dc:"创建时间"`
+	UpdatedAt *gtime.Time `json:"UpdatedAt" dc:"更新时间"`
 }
 
 // BuildingListReq 建筑列表
@@ -66,7 +66,7 @@ type BuildingListRes struct {
 
 // FloorCreateReq 创建楼层
 type FloorCreateReq struct {
-	BuildingId uint64 `json:"building_id" dc:"建筑ID"`
+	BuildingId uint64 `json:"buildingId" dc:"建筑ID"`
 	Name       string `json:"name" dc:"楼层名称"`
 	Code       string `json:"code" dc:"楼层编号"`
 	FloorNo    int    `json:"floorNo" dc:"楼层序号"`
@@ -76,7 +76,7 @@ type FloorCreateReq struct {
 // FloorUpdateReq 修改楼层
 type FloorUpdateReq struct {
 	Id         uint64 `json:"id" dc:"ID"`
-	BuildingId uint64 `json:"building_id" dc:"建筑ID"`
+	BuildingId uint64 `json:"buildingId" dc:"建筑ID"`
 	Name       string `json:"name" dc:"楼层名称"`
 	Code       string `json:"code" dc:"楼层编号"`
 	FloorNo    int    `json:"floorNo" dc:"楼层序号"`
@@ -94,31 +94,95 @@ type FloorViewReq struct {
 }
 type FloorViewRes struct {
 	Id         uint64      `json:"id" dc:"ID"`
-	BuildingId uint64      `json:"building_id" dc:"建筑ID"`
+	BuildingId uint64      `json:"buildingId" dc:"建筑ID"`
 	Name       string      `json:"name" dc:"楼层名称"`
 	Code       string      `json:"code" dc:"楼层编号"`
 	FloorNo    int         `json:"floorNo" dc:"楼层序号"`
 	Remark     string      `json:"remark" dc:"备注"`
-	CreateAt   *gtime.Time `json:"createAt" dc:"创建时间"`
-	UpdateAt   *gtime.Time `json:"updateAt" dc:"更新时间"`
+	CreatedAt  *gtime.Time `json:"CreatedAt" dc:"创建时间"`
+	UpdatedAt  *gtime.Time `json:"UpdatedAt" dc:"更新时间"`
 }
 
 // FloorListReq 楼层列表
 type FloorListReq struct {
 	common.PageRequest
 	Id         uint64        `json:"id" dc:"ID"`
-	BuildingId uint64        `json:"building_id" dc:"建筑ID"`
+	BuildingId uint64        `json:"buildingId" dc:"建筑ID"`
 	Name       string        `json:"name" dc:"楼层名称"`
 	Code       string        `json:"code" dc:"楼层编号"`
 	CreatedAt  []*gtime.Time `json:"createdAt" dc:"创建时间"`
 }
 type FloorListRes struct {
 	Id         uint64      `json:"id" dc:"ID"`
-	BuildingId uint64      `json:"building_id" dc:"建筑ID"`
+	BuildingId uint64      `json:"buildingId" dc:"建筑ID"`
 	Name       string      `json:"name" dc:"楼层名称"`
 	Code       string      `json:"code" dc:"楼层编号"`
 	FloorNo    int         `json:"floorNo" dc:"楼层序号"`
 	Remark     string      `json:"remark" dc:"备注"`
-	CreateAt   *gtime.Time `json:"createAt" dc:"创建时间"`
-	UpdateAt   *gtime.Time `json:"updateAt" dc:"更新时间"`
+	CreatedAt  *gtime.Time `json:"CreatedAt" dc:"创建时间"`
+	UpdatedAt  *gtime.Time `json:"UpdatedAt" dc:"更新时间"`
+}
+
+// RoomCreateReq 创建房间
+type RoomCreateReq struct {
+	BuildingId uint64 `json:"buildingId" dc:"建筑ID"`
+	FloorId    uint64 `json:"floorId" dc:"楼层ID"`
+	Name       string `json:"name" dc:"房间名称"`
+	Code       string `json:"code" dc:"房间编码"`
+	RoomNo     string `json:"roomNo" dc:"房间号"`
+	Remark     string `json:"remark" dc:"备注"`
+}
+
+// RoomUpdateReq 修改房间
+type RoomUpdateReq struct {
+	Id         uint64 `json:"id" dc:"ID"`
+	BuildingId uint64 `json:"buildingId" dc:"建筑ID"`
+	FloorId    uint64 `json:"floorId" dc:"楼层ID"`
+	Name       string `json:"name" dc:"房间名称"`
+	Code       string `json:"code" dc:"房间编码"`
+	RoomNo     string `json:"roomNo" dc:"房间号"`
+	Remark     string `json:"remark" dc:"备注"`
+}
+
+// RoomDeleteReq 删除房间
+type RoomDeleteReq struct {
+	Id uint64 `json:"id" dc:"ID"`
+}
+
+// RoomViewReq 房间详情
+type RoomViewReq struct {
+	Id uint64 `json:"id" dc:"ID"`
+}
+type RoomViewRes struct {
+	Id         uint64      `json:"id" dc:"ID"`
+	BuildingId uint64      `json:"buildingId" dc:"建筑ID"`
+	FloorId    uint64      `json:"floorId" dc:"楼层ID"`
+	Name       string      `json:"name" dc:"房间名称"`
+	Code       string      `json:"code" dc:"房间编码"`
+	RoomNo     string      `json:"roomNo" dc:"房间号"`
+	Remark     string      `json:"remark" dc:"备注"`
+	CreatedAt  *gtime.Time `json:"CreatedAt" dc:"创建时间"`
+	UpdatedAt  *gtime.Time `json:"UpdatedAt" dc:"更新时间"`
+}
+
+// RoomListReq 房间列表
+type RoomListReq struct {
+	common.PageRequest
+	Id         uint64        `json:"id" dc:"ID"`
+	BuildingId uint64        `json:"buildingId" dc:"建筑ID"`
+	FloorId    uint64        `json:"floorId" dc:"楼层ID"`
+	Name       string        `json:"name" dc:"房间名称"`
+	Code       string        `json:"code" dc:"房间编码"`
+	CreatedAt  []*gtime.Time `json:"createdAt" dc:"创建时间"`
+}
+type RoomListRes struct {
+	Id         uint64      `json:"id" dc:"ID"`
+	BuildingId uint64      `json:"buildingId" dc:"建筑ID"`
+	FloorId    uint64      `json:"floorId" dc:"楼层ID"`
+	Name       string      `json:"name" dc:"房间名称"`
+	Code       string      `json:"code" dc:"房间编码"`
+	RoomNo     string      `json:"roomNo" dc:"房间号"`
+	Remark     string      `json:"remark" dc:"备注"`
+	CreatedAt  *gtime.Time `json:"CreatedAt" dc:"创建时间"`
+	UpdatedAt  *gtime.Time `json:"UpdatedAt" dc:"更新时间"`
 }

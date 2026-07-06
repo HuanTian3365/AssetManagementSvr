@@ -132,13 +132,13 @@ func (a *sAsset) BuildingView(ctx context.Context, req *model.BuildingViewReq) (
 		return
 	}
 	return &model.BuildingViewRes{
-		Id:       data.Id,
-		Name:     data.Name,
-		Code:     data.Code,
-		Address:  data.Address,
-		Remark:   data.Remark,
-		CreateAt: data.CreatedAt,
-		UpdateAt: data.UpdatedAt,
+		Id:        data.Id,
+		Name:      data.Name,
+		Code:      data.Code,
+		Address:   data.Address,
+		Remark:    data.Remark,
+		CreatedAt: data.CreatedAt,
+		UpdatedAt: data.UpdatedAt,
 	}, nil
 }
 

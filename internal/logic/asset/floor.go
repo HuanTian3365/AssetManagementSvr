@@ -145,7 +145,13 @@ func (a *sAsset) FloorDelete(ctx context.Context, req *model.FloorDeleteReq) (er
 	if floor == nil {
 		return gerror.New("楼层不存在")
 	}
-	// TODO: 判断房间,先等房间接口实现
+	room, err := a.getRoomByFloorId(ctx, req.Id)
+	if err != nil {
+		return err
+	}
+	if room != nil {
+		return gerror.New("楼层下存在房间,无法删除")
+	}
 
 	_, err = dao.AssetFloor.Ctx(ctx).WherePri(req.Id).Delete()
 	return
@@ -167,10 +173,12 @@ func (a *sAsset) FloorView(ctx context.Context, req *model.FloorViewReq) (res *m
 		Code:       floor.Code,
 		FloorNo:    floor.FloorNo,
 		Remark:     floor.Remark,
-		CreateAt:   floor.CreatedAt,
-		UpdateAt:   floor.UpdatedAt,
+		CreatedAt:  floor.CreatedAt,
+		UpdatedAt:  floor.UpdatedAt,
 	}, nil
 }
+
+// FloorList 楼层列表
 func (a *sAsset) FloorList(ctx context.Context, req *model.FloorListReq) (res []*model.FloorListRes, total int, err error) {
 	mod := dao.AssetFloor.Ctx(ctx)
 	col := dao.AssetFloor.Columns()
