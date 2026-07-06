@@ -99,9 +99,17 @@ func (a *sAsset) BuildingDelete(ctx context.Context, req *model.BuildingDeleteRe
 	if err != nil {
 		return err
 	}
-
 	if data == nil {
 		return gerror.New("建筑不存在")
+	}
+
+	// 判断建筑下是否存在楼层
+	floor, err := a.getFloorByBuild(ctx, req.Id)
+	if err != nil {
+		return err
+	}
+	if floor != nil {
+		return gerror.New("建筑下存在楼层,无法删除")
 	}
 
 	// 删除数据

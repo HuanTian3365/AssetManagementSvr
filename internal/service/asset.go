@@ -22,6 +22,15 @@ type (
 		BuildingView(ctx context.Context, req *model.BuildingViewReq) (res *model.BuildingViewRes, err error)
 		// BuildingList 建筑列表
 		BuildingList(ctx context.Context, req *model.BuildingListReq) (res []*model.BuildingListRes, total int, err error)
+		// FloorCreate 新建楼层
+		FloorCreate(ctx context.Context, req *model.FloorCreateReq) (err error)
+		// FloorUpdate 更新楼层
+		FloorUpdate(ctx context.Context, req *model.FloorUpdateReq) (err error)
+		// FloorDelete 删除楼层
+		FloorDelete(ctx context.Context, req *model.FloorDeleteReq) (err error)
+		// FloorView 楼层详情
+		FloorView(ctx context.Context, req *model.FloorViewReq) (res *model.FloorViewRes, err error)
+		FloorList(ctx context.Context, req *model.FloorListReq) (res []*model.FloorListRes, total int, err error)
 	}
 )
 
