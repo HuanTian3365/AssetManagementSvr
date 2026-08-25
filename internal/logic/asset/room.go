@@ -67,6 +67,9 @@ func (a *sAsset) RoomCreate(ctx context.Context, req *model.RoomCreateReq) (err 
 	if floor == nil {
 		return gerror.New("楼层不存在")
 	}
+	if floor.BuildingId != req.BuildingId {
+		return gerror.New("楼层不在该建筑下")
+	}
 	room, err = a.getRoomByNo(ctx, req.BuildingId, req.FloorId, req.RoomNo)
 	if err != nil {
 		return err
@@ -127,6 +130,9 @@ func (a *sAsset) RoomUpdate(ctx context.Context, req *model.RoomUpdateReq) (err 
 	if floor == nil {
 		return gerror.New("楼层不存在")
 	}
+	if floor.BuildingId != req.BuildingId {
+		return gerror.New("楼层不在该建筑下")
+	}
 	room, err = a.getRoomByNo(ctx, req.BuildingId, req.FloorId, req.RoomNo)
 	if err != nil {
 		return err
@@ -153,7 +159,7 @@ func (a *sAsset) RoomDelete(ctx context.Context, req *model.RoomDeleteReq) (err 
 	}
 	// TODO: 等关联表
 	_, err = dao.AssetRoom.Ctx(ctx).WherePri(req.Id).Delete()
-	return nil
+	return
 }
 
 func (a *sAsset) RoomView(ctx context.Context, req *model.RoomViewReq) (res *model.RoomViewRes, err error) {

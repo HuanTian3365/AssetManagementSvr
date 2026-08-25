@@ -186,3 +186,62 @@ type RoomListRes struct {
 	CreatedAt  *gtime.Time `json:"CreatedAt" dc:"创建时间"`
 	UpdatedAt  *gtime.Time `json:"UpdatedAt" dc:"更新时间"`
 }
+
+// CategoryCreateReq 新增分类
+type CategoryCreateReq struct {
+	ParentId uint64 `json:"parentId" dc:"父分类ID"`
+	Name     string `json:"name" dc:"分类名称"`
+	Code     string `json:"code" dc:"分类编码"`
+	Sort     int    `json:"sort" dc:"分类排序"`
+	Remark   string `json:"remark" dc:"备注"`
+}
+
+// CategoryUpdateReq 更新分类
+type CategoryUpdateReq struct {
+	Id       uint64 `json:"id" dc:"ID"`
+	ParentId uint64 `json:"parentId" dc:"父分类ID"`
+	Name     string `json:"name" dc:"分类名称"`
+	Code     string `json:"code" dc:"分类编码"`
+	Sort     int    `json:"sort" dc:"分类排序"`
+	Remark   string `json:"remark" dc:"备注"`
+}
+
+// CategoryDeleteReq 删除分类
+type CategoryDeleteReq struct {
+	Id uint64 `json:"id" dc:"ID"`
+}
+
+// CategoryViewReq 分类详情
+type CategoryViewReq struct {
+	Id uint64 `json:"id" dc:"ID"`
+}
+type CategoryViewRes struct {
+	Id        uint64      `json:"id" dc:"ID"`
+	ParentId  uint64      `json:"parentId" dc:"父分类ID"`
+	Name      string      `json:"name" dc:"分类名称"`
+	Code      string      `json:"code" dc:"分类编码"`
+	Sort      int         `json:"sort" dc:"分类排序"`
+	Remark    string      `json:"remark" dc:"备注"`
+	CreatedAt *gtime.Time `json:"CreatedAt" dc:"创建时间"`
+	UpdatedAt *gtime.Time `json:"UpdatedAt" dc:"更新时间"`
+}
+
+// CategoryListReq 分类列表
+type CategoryListReq struct {
+	common.PageRequest
+	Id        uint64        `json:"id" dc:"ID"`
+	ParentId  uint64        `json:"parentId" dc:"父分类ID"`
+	Name      string        `json:"name" dc:"分类名称"`
+	Code      string        `json:"code" dc:"分类编码"`
+	CreatedAt []*gtime.Time `json:"createdAt" dc:"创建时间"`
+}
+type CategoryListRes struct {
+	Id        uint64      `json:"id" dc:"ID"`
+	ParentId  uint64      `json:"parentId" dc:"父分类ID"`
+	Name      string      `json:"name" dc:"分类名称"`
+	Code      string      `json:"code" dc:"分类编码"`
+	Sort      int         `json:"sort" dc:"分类排序"`
+	Remark    string      `json:"remark" dc:"备注"`
+	CreatedAt *gtime.Time `json:"CreatedAt" dc:"创建时间"`
+	UpdatedAt *gtime.Time `json:"UpdatedAt" dc:"更新时间"`
+}
