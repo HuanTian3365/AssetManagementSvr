@@ -2,6 +2,7 @@
 # utf8mb4
 # utf8mb4_0900_ai_ci
 
+# 建筑表
 drop table if exists `asset_building`;
 create table if not exists `asset_building`
 (
@@ -21,7 +22,7 @@ create table if not exists `asset_building`
   collate = utf8mb4_general_ci
     comment ='建筑表';
 
-
+# 楼层表
 drop table if exists `asset_floor`;
 create table if not exists `asset_floor`
 (
@@ -44,7 +45,7 @@ create table if not exists `asset_floor`
     comment ='楼层表';
 
 
-
+# 房间表
 drop table if exists `asset_room`;
 create table if not exists `asset_room`
 (
@@ -68,7 +69,7 @@ create table if not exists `asset_room`
   collate = utf8mb4_general_ci
     comment ='房间表';
 
-
+# 分类表
 drop table if exists `asset_category`;
 create table if not exists `asset_category`
 (
@@ -90,7 +91,7 @@ create table if not exists `asset_category`
   collate = utf8mb4_general_ci
     comment ='分类表';
 
-
+# 产品表
 drop table if exists `asset_product`;
 create table if not exists `asset_product`
 (
@@ -114,6 +115,7 @@ create table if not exists `asset_product`
   collate = utf8mb4_general_ci
     comment ='产品表';
 
+# 资产表
 drop table if exists `asset_item`;
 create table if not exists `asset_item`
 (
@@ -141,7 +143,7 @@ create table if not exists `asset_item`
   collate = utf8mb4_general_ci
     comment ='资产表';
 
-
+# 资产记录表
 drop table if exists `asset_location_record`;
 create table if not exists `asset_location_record`
 (

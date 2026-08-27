@@ -40,5 +40,5 @@ type RoomListReq struct {
 }
 type RoomListRes struct {
 	common.PageResult
-	Items []*model.RoomListRes
+	Items []*model.RoomListRes `json:"items"   dc:"数据列表"`
 }

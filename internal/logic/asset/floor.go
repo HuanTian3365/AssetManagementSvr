@@ -11,7 +11,7 @@ import (
 
 // 根据建筑获取楼层
 func (a *sAsset) getFloorByBuild(ctx context.Context, buildingId uint64) (res *entity.AssetFloor, err error) {
-	err = dao.AssetFloor.Ctx(ctx).Unscoped().Where(dao.AssetFloor.Columns().BuildingId, buildingId).Scan(&res)
+	err = dao.AssetFloor.Ctx(ctx).Where(dao.AssetFloor.Columns().BuildingId, buildingId).Scan(&res)
 	return
 
 }

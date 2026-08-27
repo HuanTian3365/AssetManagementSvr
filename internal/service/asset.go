@@ -22,10 +22,15 @@ type (
 		BuildingView(ctx context.Context, req *model.BuildingViewReq) (res *model.BuildingViewRes, err error)
 		// BuildingList 建筑列表
 		BuildingList(ctx context.Context, req *model.BuildingListReq) (res []*model.BuildingListRes, total int, err error)
+		// CategoryCreate 新建分类
 		CategoryCreate(ctx context.Context, req *model.CategoryCreateReq) (err error)
+		// CategoryUpdate 更新分类
 		CategoryUpdate(ctx context.Context, req *model.CategoryUpdateReq) (err error)
+		// CategoryDelete 删除分类
 		CategoryDelete(ctx context.Context, req *model.CategoryDeleteReq) (err error)
+		// CategoryView 分类详情
 		CategoryView(ctx context.Context, req *model.CategoryViewReq) (res *model.CategoryViewRes, err error)
+		// CategoryList 分类列表
 		CategoryList(ctx context.Context, req *model.CategoryListReq) (res []*model.CategoryListRes, total int, err error)
 		// FloorCreate 新建楼层
 		FloorCreate(ctx context.Context, req *model.FloorCreateReq) (err error)

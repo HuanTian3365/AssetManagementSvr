@@ -1,14 +1,13 @@
 package asset
 
 import (
+	"asset_management_svr/internal/service"
 	"context"
-
-	"github.com/gogf/gf/v2/errors/gcode"
-	"github.com/gogf/gf/v2/errors/gerror"
 
 	"asset_management_svr/api/asset/v1"
 )
 
 func (c *ControllerV1) CategoryUpdate(ctx context.Context, req *v1.CategoryUpdateReq) (res *v1.CategoryUpdateRes, err error) {
-	return nil, gerror.NewCode(gcode.CodeNotImplemented)
+	err = service.Asset().CategoryUpdate(ctx, &req.CategoryUpdateReq)
+	return
 }
