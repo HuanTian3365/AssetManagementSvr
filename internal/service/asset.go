@@ -42,6 +42,16 @@ type (
 		FloorView(ctx context.Context, req *model.FloorViewReq) (res *model.FloorViewRes, err error)
 		// FloorList 楼层列表
 		FloorList(ctx context.Context, req *model.FloorListReq) (res []*model.FloorListRes, total int, err error)
+		// ProductCreate 新增产品
+		ProductCreate(ctx context.Context, req *model.ProductCreateReq) (err error)
+		// ProductUpdate 更新产品
+		ProductUpdate(ctx context.Context, req *model.ProductUpdateReq) (err error)
+		// ProductDelete 删除产品
+		ProductDelete(ctx context.Context, req *model.ProductDeleteReq) (err error)
+		// ProductView 产品详情
+		ProductView(ctx context.Context, req *model.ProductViewReq) (res *model.ProductViewRes, err error)
+		// ProductList 产品列表
+		ProductList(ctx context.Context, req *model.ProductListReq) (res []*model.ProductListRes, total int, err error)
 		RoomCreate(ctx context.Context, req *model.RoomCreateReq) (err error)
 		RoomUpdate(ctx context.Context, req *model.RoomUpdateReq) (err error)
 		RoomDelete(ctx context.Context, req *model.RoomDeleteReq) (err error)

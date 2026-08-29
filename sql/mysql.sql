@@ -101,7 +101,7 @@ create table if not exists `asset_product`
     `code`        varchar(64)     not null comment '产品编码',
     `brand`       varchar(100)    not null default '' comment '品牌',
     `model`       varchar(100)    not null default '' comment '型号',
-    `unit`        varchar(32)     not null default '件' comment '计量单位',
+    `unit`        varchar(32)     not null default '' comment '计量单位',
     `remark`      varchar(500)    not null default '' comment '备注',
     `created_at`  datetime        not null default current_timestamp comment '创建时间',
     `updated_at`  datetime        not null default current_timestamp on update current_timestamp comment '更新时间',

@@ -15,7 +15,6 @@ type BuildingCreateReq struct {
 }
 
 // BuildingUpdateReq 更新建筑
-
 type BuildingUpdateReq struct {
 	Id      uint64 `json:"id" dc:"ID"`
 	Name    string `json:"name" dc:"建筑名称"`
@@ -244,4 +243,72 @@ type CategoryListRes struct {
 	Remark    string      `json:"remark" dc:"备注"`
 	CreatedAt *gtime.Time `json:"CreatedAt" dc:"创建时间"`
 	UpdatedAt *gtime.Time `json:"UpdatedAt" dc:"更新时间"`
+}
+
+// ProductCreateReq 新增产品
+type ProductCreateReq struct {
+	CategoryId uint64 `json:"categoryId" dc:"所属分类"`
+	Name       string `json:"name" dc:"产品名称"`
+	Code       string `json:"code" dc:"产品编码"`
+	Brand      string `json:"brand" dc:"品牌"`
+	Model      string `json:"model" dc:"型号"`
+	Unit       string `json:"unit" dc:"计量单位"`
+	Remark     string `json:"remark" dc:"备注"`
+}
+
+// ProductUpdateReq 更新产品
+type ProductUpdateReq struct {
+	Id         uint64 `json:"id" dc:"ID"`
+	CategoryId uint64 `json:"categoryId" dc:"所属分类"`
+	Name       string `json:"name" dc:"产品名称"`
+	Code       string `json:"code" dc:"产品编码"`
+	Brand      string `json:"brand" dc:"品牌"`
+	Model      string `json:"model" dc:"型号"`
+	Unit       string `json:"unit" dc:"计量单位"`
+	Remark     string `json:"remark" dc:"备注"`
+}
+
+// ProductDeleteReq 删除产品
+type ProductDeleteReq struct {
+	Id uint64 `json:"id" dc:"ID"`
+}
+
+// ProductViewReq 产品详情
+type ProductViewReq struct {
+	Id uint64 `json:"id" dc:"ID"`
+}
+type ProductViewRes struct {
+	Id         uint64      `json:"id" dc:"ID"`
+	CategoryId uint64      `json:"categoryId" dc:"所属分类"`
+	Name       string      `json:"name" dc:"产品名称"`
+	Code       string      `json:"code" dc:"产品编码"`
+	Brand      string      `json:"brand" dc:"品牌"`
+	Model      string      `json:"model" dc:"型号"`
+	Unit       string      `json:"unit" dc:"计量单位"`
+	Remark     string      `json:"remark" dc:"备注"`
+	CreatedAt  *gtime.Time `json:"CreatedAt" dc:"创建时间"`
+	UpdatedAt  *gtime.Time `json:"UpdatedAt" dc:"更新时间"`
+}
+
+// ProductListReq 产品列表
+type ProductListReq struct {
+	common.PageRequest
+	Id         uint64        `json:"id" dc:"ID"`
+	CategoryId uint64        `json:"categoryId" dc:"所属分类"`
+	Name       string        `json:"name" dc:"产品名称"`
+	Code       string        `json:"code" dc:"产品编码"`
+	CreatedAt  []*gtime.Time `json:"createdAt" dc:"创建时间"`
+}
+
+type ProductListRes struct {
+	Id         uint64      `json:"id" dc:"ID"`
+	CategoryId uint64      `json:"categoryId" dc:"所属分类"`
+	Name       string      `json:"name" dc:"产品名称"`
+	Code       string      `json:"code" dc:"产品编码"`
+	Brand      string      `json:"brand" dc:"品牌"`
+	Model      string      `json:"model" dc:"型号"`
+	Unit       string      `json:"unit" dc:"计量单位"`
+	Remark     string      `json:"remark" dc:"备注"`
+	CreatedAt  *gtime.Time `json:"CreatedAt" dc:"创建时间"`
+	UpdatedAt  *gtime.Time `json:"UpdatedAt" dc:"更新时间"`
 }
