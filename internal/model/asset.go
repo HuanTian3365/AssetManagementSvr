@@ -39,8 +39,8 @@ type BuildingViewRes struct {
 	Code      string      `json:"code" dc:"建筑编码"`
 	Address   string      `json:"address" dc:"建筑地址"`
 	Remark    string      `json:"remark" dc:"备注"`
-	CreatedAt *gtime.Time `json:"CreatedAt" dc:"创建时间"`
-	UpdatedAt *gtime.Time `json:"UpdatedAt" dc:"更新时间"`
+	CreatedAt *gtime.Time `json:"createdAt" dc:"创建时间"`
+	UpdatedAt *gtime.Time `json:"updatedAt" dc:"更新时间"`
 }
 
 // BuildingListReq 建筑列表
@@ -98,8 +98,8 @@ type FloorViewRes struct {
 	Code       string      `json:"code" dc:"楼层编号"`
 	FloorNo    int         `json:"floorNo" dc:"楼层序号"`
 	Remark     string      `json:"remark" dc:"备注"`
-	CreatedAt  *gtime.Time `json:"CreatedAt" dc:"创建时间"`
-	UpdatedAt  *gtime.Time `json:"UpdatedAt" dc:"更新时间"`
+	CreatedAt  *gtime.Time `json:"createdAt" dc:"创建时间"`
+	UpdatedAt  *gtime.Time `json:"updatedAt" dc:"更新时间"`
 }
 
 // FloorListReq 楼层列表
@@ -118,8 +118,8 @@ type FloorListRes struct {
 	Code       string      `json:"code" dc:"楼层编号"`
 	FloorNo    int         `json:"floorNo" dc:"楼层序号"`
 	Remark     string      `json:"remark" dc:"备注"`
-	CreatedAt  *gtime.Time `json:"CreatedAt" dc:"创建时间"`
-	UpdatedAt  *gtime.Time `json:"UpdatedAt" dc:"更新时间"`
+	CreatedAt  *gtime.Time `json:"createdAt" dc:"创建时间"`
+	UpdatedAt  *gtime.Time `json:"updatedAt" dc:"更新时间"`
 }
 
 // RoomCreateReq 创建房间
@@ -160,8 +160,8 @@ type RoomViewRes struct {
 	Code       string      `json:"code" dc:"房间编码"`
 	RoomNo     string      `json:"roomNo" dc:"房间号"`
 	Remark     string      `json:"remark" dc:"备注"`
-	CreatedAt  *gtime.Time `json:"CreatedAt" dc:"创建时间"`
-	UpdatedAt  *gtime.Time `json:"UpdatedAt" dc:"更新时间"`
+	CreatedAt  *gtime.Time `json:"createdAt" dc:"创建时间"`
+	UpdatedAt  *gtime.Time `json:"updatedAt" dc:"更新时间"`
 }
 
 // RoomListReq 房间列表
@@ -182,8 +182,8 @@ type RoomListRes struct {
 	Code       string      `json:"code" dc:"房间编码"`
 	RoomNo     string      `json:"roomNo" dc:"房间号"`
 	Remark     string      `json:"remark" dc:"备注"`
-	CreatedAt  *gtime.Time `json:"CreatedAt" dc:"创建时间"`
-	UpdatedAt  *gtime.Time `json:"UpdatedAt" dc:"更新时间"`
+	CreatedAt  *gtime.Time `json:"createdAt" dc:"创建时间"`
+	UpdatedAt  *gtime.Time `json:"updatedAt" dc:"更新时间"`
 }
 
 // CategoryCreateReq 新增分类
@@ -221,8 +221,8 @@ type CategoryViewRes struct {
 	Code      string      `json:"code" dc:"分类编码"`
 	Sort      int         `json:"sort" dc:"分类排序"`
 	Remark    string      `json:"remark" dc:"备注"`
-	CreatedAt *gtime.Time `json:"CreatedAt" dc:"创建时间"`
-	UpdatedAt *gtime.Time `json:"UpdatedAt" dc:"更新时间"`
+	CreatedAt *gtime.Time `json:"createdAt" dc:"创建时间"`
+	UpdatedAt *gtime.Time `json:"updatedAt" dc:"更新时间"`
 }
 
 // CategoryListReq 分类列表
@@ -241,8 +241,8 @@ type CategoryListRes struct {
 	Code      string      `json:"code" dc:"分类编码"`
 	Sort      int         `json:"sort" dc:"分类排序"`
 	Remark    string      `json:"remark" dc:"备注"`
-	CreatedAt *gtime.Time `json:"CreatedAt" dc:"创建时间"`
-	UpdatedAt *gtime.Time `json:"UpdatedAt" dc:"更新时间"`
+	CreatedAt *gtime.Time `json:"createdAt" dc:"创建时间"`
+	UpdatedAt *gtime.Time `json:"updatedAt" dc:"更新时间"`
 }
 
 // ProductCreateReq 新增产品
@@ -286,8 +286,8 @@ type ProductViewRes struct {
 	Model      string      `json:"model" dc:"型号"`
 	Unit       string      `json:"unit" dc:"计量单位"`
 	Remark     string      `json:"remark" dc:"备注"`
-	CreatedAt  *gtime.Time `json:"CreatedAt" dc:"创建时间"`
-	UpdatedAt  *gtime.Time `json:"UpdatedAt" dc:"更新时间"`
+	CreatedAt  *gtime.Time `json:"createdAt" dc:"创建时间"`
+	UpdatedAt  *gtime.Time `json:"updatedAt" dc:"更新时间"`
 }
 
 // ProductListReq 产品列表
@@ -309,8 +309,8 @@ type ProductListRes struct {
 	Model      string      `json:"model" dc:"型号"`
 	Unit       string      `json:"unit" dc:"计量单位"`
 	Remark     string      `json:"remark" dc:"备注"`
-	CreatedAt  *gtime.Time `json:"CreatedAt" dc:"创建时间"`
-	UpdatedAt  *gtime.Time `json:"UpdatedAt" dc:"更新时间"`
+	CreatedAt  *gtime.Time `json:"createdAt" dc:"创建时间"`
+	UpdatedAt  *gtime.Time `json:"updatedAt" dc:"更新时间"`
 }
 
 // ItemCreateReq 新增物品
@@ -321,6 +321,7 @@ type ItemCreateReq struct {
 	Status            int8        `json:"status" dc:"资产状态:1闲置 2在用 3维修 4报废"`
 	CurrentBuildingId uint64      `json:"currentBuildingId" dc:"建筑ID"`
 	CurrentFloorId    uint64      `json:"currentFloorId" dc:"楼层ID"`
+	CurrentRoomId     uint64      `json:"currentRoomId" dc:"房间ID"`
 	PurchaseDate      *gtime.Time `json:"purchaseDate" dc:"购买日期"`
 	PurchasePrice     float32     `json:"purchasePrice" dc:"购买价格"`
 	Remark            string      `json:"remark" dc:"备注"`
@@ -335,6 +336,7 @@ type ItemUpdateReq struct {
 	Status            int8        `json:"status" dc:"资产状态:1闲置 2在用 3维修 4报废"`
 	CurrentBuildingId uint64      `json:"currentBuildingId" dc:"建筑ID"`
 	CurrentFloorId    uint64      `json:"currentFloorId" dc:"楼层ID"`
+	CurrentRoomId     uint64      `json:"currentRoomId" dc:"房间ID"`
 	PurchaseDate      *gtime.Time `json:"purchaseDate" dc:"购买日期"`
 	PurchasePrice     float32     `json:"purchasePrice" dc:"购买价格"`
 	Remark            string      `json:"remark" dc:"备注"`
@@ -357,11 +359,12 @@ type ItemViewRes struct {
 	Status            int8        `json:"status" dc:"资产状态:1闲置 2在用 3维修 4报废"`
 	CurrentBuildingId uint64      `json:"currentBuildingId" dc:"建筑ID"`
 	CurrentFloorId    uint64      `json:"currentFloorId" dc:"楼层ID"`
+	CurrentRoomId     uint64      `json:"currentRoomId" dc:"房间ID"`
 	PurchaseDate      *gtime.Time `json:"purchaseDate" dc:"购买日期"`
 	PurchasePrice     float32     `json:"purchasePrice" dc:"购买价格"`
 	Remark            string      `json:"remark" dc:"备注"`
-	CreatedAt         *gtime.Time `json:"CreatedAt" dc:"创建时间"`
-	UpdatedAt         *gtime.Time `json:"UpdatedAt" dc:"更新时间"`
+	CreatedAt         *gtime.Time `json:"createdAt" dc:"创建时间"`
+	UpdatedAt         *gtime.Time `json:"updatedAt" dc:"更新时间"`
 }
 
 // ItemListReq 物品列表
@@ -382,9 +385,10 @@ type ItemListRes struct {
 	Status            int8        `json:"status" dc:"资产状态:1闲置 2在用 3维修 4报废"`
 	CurrentBuildingId uint64      `json:"currentBuildingId" dc:"建筑ID"`
 	CurrentFloorId    uint64      `json:"currentFloorId" dc:"楼层ID"`
+	CurrentRoomId     uint64      `json:"currentRoomId" dc:"房间ID"`
 	PurchaseDate      *gtime.Time `json:"purchaseDate" dc:"购买日期"`
-	PurchasePrice     float32     `json:"purchasePrice" dc:"购买价格"`
+	PurchasePrice     float64     `json:"purchasePrice" dc:"购买价格"`
 	Remark            string      `json:"remark" dc:"备注"`
-	CreatedAt         *gtime.Time `json:"CreatedAt" dc:"创建时间"`
-	UpdatedAt         *gtime.Time `json:"UpdatedAt" dc:"更新时间"`
+	CreatedAt         *gtime.Time `json:"createdAt" dc:"创建时间"`
+	UpdatedAt         *gtime.Time `json:"updatedAt" dc:"更新时间"`
 }
