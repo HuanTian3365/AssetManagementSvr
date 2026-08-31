@@ -312,3 +312,79 @@ type ProductListRes struct {
 	CreatedAt  *gtime.Time `json:"CreatedAt" dc:"创建时间"`
 	UpdatedAt  *gtime.Time `json:"UpdatedAt" dc:"更新时间"`
 }
+
+// ItemCreateReq 新增物品
+type ItemCreateReq struct {
+	ProductId         uint64      `json:"productId" dc:"产品ID"`
+	Name              string      `json:"name" dc:"资产名称"`
+	AssetCode         string      `json:"assetCode" dc:"资产编码"`
+	Status            int8        `json:"status" dc:"资产状态:1闲置 2在用 3维修 4报废"`
+	CurrentBuildingId uint64      `json:"currentBuildingId" dc:"建筑ID"`
+	CurrentFloorId    uint64      `json:"currentFloorId" dc:"楼层ID"`
+	PurchaseDate      *gtime.Time `json:"purchaseDate" dc:"购买日期"`
+	PurchasePrice     float32     `json:"purchasePrice" dc:"购买价格"`
+	Remark            string      `json:"remark" dc:"备注"`
+}
+
+// ItemUpdateReq 更新物品
+type ItemUpdateReq struct {
+	Id                uint64      `json:"id" dc:"ID"`
+	ProductId         uint64      `json:"productId" dc:"产品ID"`
+	Name              string      `json:"name" dc:"资产名称"`
+	AssetCode         string      `json:"assetCode" dc:"资产编码"`
+	Status            int8        `json:"status" dc:"资产状态:1闲置 2在用 3维修 4报废"`
+	CurrentBuildingId uint64      `json:"currentBuildingId" dc:"建筑ID"`
+	CurrentFloorId    uint64      `json:"currentFloorId" dc:"楼层ID"`
+	PurchaseDate      *gtime.Time `json:"purchaseDate" dc:"购买日期"`
+	PurchasePrice     float32     `json:"purchasePrice" dc:"购买价格"`
+	Remark            string      `json:"remark" dc:"备注"`
+}
+
+// ItemDeleteReq 删除物品
+type ItemDeleteReq struct {
+	Id uint64 `json:"id" dc:"ID"`
+}
+
+// ItemViewReq 物品详情
+type ItemViewReq struct {
+	Id uint64 `json:"id" dc:"ID"`
+}
+type ItemViewRes struct {
+	Id                uint64      `json:"id" dc:"ID"`
+	ProductId         uint64      `json:"productId" dc:"产品ID"`
+	Name              string      `json:"name" dc:"资产名称"`
+	AssetCode         string      `json:"assetCode" dc:"资产编码"`
+	Status            int8        `json:"status" dc:"资产状态:1闲置 2在用 3维修 4报废"`
+	CurrentBuildingId uint64      `json:"currentBuildingId" dc:"建筑ID"`
+	CurrentFloorId    uint64      `json:"currentFloorId" dc:"楼层ID"`
+	PurchaseDate      *gtime.Time `json:"purchaseDate" dc:"购买日期"`
+	PurchasePrice     float32     `json:"purchasePrice" dc:"购买价格"`
+	Remark            string      `json:"remark" dc:"备注"`
+	CreatedAt         *gtime.Time `json:"CreatedAt" dc:"创建时间"`
+	UpdatedAt         *gtime.Time `json:"UpdatedAt" dc:"更新时间"`
+}
+
+// ItemListReq 物品列表
+type ItemListReq struct {
+	common.PageRequest
+	Id        uint64        `json:"id" dc:"ID"`
+	ProductId uint64        `json:"productId" dc:"产品ID"`
+	Name      string        `json:"name" dc:"资产名称"`
+	AssetCode string        `json:"assetCode" dc:"资产编码"`
+	Status    int8          `json:"status" dc:"资产状态:1闲置 2在用 3维修 4报废"`
+	CreatedAt []*gtime.Time `json:"createdAt" dc:"创建时间"`
+}
+type ItemListRes struct {
+	Id                uint64      `json:"id" dc:"ID"`
+	ProductId         uint64      `json:"productId" dc:"产品ID"`
+	Name              string      `json:"name" dc:"资产名称"`
+	AssetCode         string      `json:"assetCode" dc:"资产编码"`
+	Status            int8        `json:"status" dc:"资产状态:1闲置 2在用 3维修 4报废"`
+	CurrentBuildingId uint64      `json:"currentBuildingId" dc:"建筑ID"`
+	CurrentFloorId    uint64      `json:"currentFloorId" dc:"楼层ID"`
+	PurchaseDate      *gtime.Time `json:"purchaseDate" dc:"购买日期"`
+	PurchasePrice     float32     `json:"purchasePrice" dc:"购买价格"`
+	Remark            string      `json:"remark" dc:"备注"`
+	CreatedAt         *gtime.Time `json:"CreatedAt" dc:"创建时间"`
+	UpdatedAt         *gtime.Time `json:"UpdatedAt" dc:"更新时间"`
+}
